@@ -1,0 +1,76 @@
+# Devlog 01 — Why Argus Exists
+
+**Date:** June 13, 2026
+
+## The why
+
+My dad works in facilities and industrial management in Dubai. I've seen
+firsthand what inspection looks like in practice: engineers going into
+spaces that are genuinely unpleasant and sometimes dangerous, in a city
+where summer temperatures outside regularly hit 45C and inside certain
+industrial environments can be worse. The job is slow, manual, and puts
+people in places they shouldn't need to be in just to check whether
+something is working or not.
+
+It got more concrete when I did internships at two UAE companies last
+year. At BEEAH, one of the UAE's largest waste management and
+environmental services groups, I saw how large-scale industrial operations
+actually run on the ground. At Nissan's UAE operations I got a closer look
+at manufacturing and engineering workflows. Both experiences made the same
+thing clear: a huge amount of human time goes into tasks that are
+repetitive, physically demanding, and in some cases genuinely risky,
+specifically because there's nothing autonomous doing them instead.
+
+That's the problem Argus is built to solve. An autonomous rover that
+navigates a facility, reads thermal signatures, detects anomalies, and
+generates a report, without a human entering the space. BEEAH is the
+first target client. I've already had conversations with them and with
+MBRIF about deployment. This isn't a school project with a real-world
+framing bolted on. The real-world deployment is the point.
+
+## Where I'm starting from
+
+I'm not starting from zero on electronics. Over the past few weeks I've
+been building up the fundamentals before touching the rover hardware.
+
+First I worked through two soldering kits. The first was a spring
+electromagnetic swing kit with LED, a simple but satisfying build that
+got me comfortable with through-hole components, iron temperature
+control, and reading a basic schematic. The second was a more involved
+obstacle avoidance smart car kit with an ultrasonic ranging sensor, which
+is directly relevant to Argus given it uses similar distance-sensing
+logic. Both came out working first try.
+
+From there I built my first completely independent project: a panning
+radar with a real-time laptop display using an ultrasonic sensor and
+Arduino. The sensor sweeps on a servo, pings distances at each angle,
+and the results render as a radar sweep on screen. It's a small project
+but it was the first thing I built without following a kit manual, and
+seeing the display populate in real time made the whole sensor-to-software
+pipeline click in a way that reading about it doesn't.
+
+## What's arriving
+
+The actual Argus parts are 2-3 days out. The build includes:
+
+- Raspberry Pi 5 8GB with AI HAT+ 26 TOPS (Hailo-8 accelerator)
+- 4x JGB37-520 200RPM DC motors with encoders
+- 4x BTS7960 43A motor drivers
+- MLX90640 32x24 thermal camera, 55 FOV
+- Pi Camera Module 3, 75
+- 2x VL53L1X laser ToF distance sensors
+- BME280, DS18B20 probes, INA219 for environmental and power telemetry
+- Gens Ace 3S LiPo, dual 10A buck converters, IP67 enclosure
+
+The chassis plate and extrusion are being laser cut externally. 3D
+printed parts will be done externally too.
+
+## What's next
+
+The moment parts arrive: unbox, photograph everything, and start with
+the ESP32 and motor driver wiring. First milestone is getting all four
+motors spinning under manual serial control before touching anything else.
+Thermal camera and CV work comes later. Discipline on sequencing matters
+here, get the chassis moving first, add sensors one at a time.
+
+Argus is being built as part of Hack Club Stardance 2026.
